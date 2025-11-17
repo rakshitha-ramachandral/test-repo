@@ -1,0 +1,49 @@
+<!-- <app-test></app-test> -->
+<app-header></app-header>
+<main>
+  <ul id="users">
+    @for (user of users; track user.id){
+    <!--available only in new Angluar versions-->
+    <!-- <li *ngFor="let user of users"> --Using ngFor for iteration rendering-->
+    <li>
+      <app-user
+        [selected]="user.id === selectedUserId"
+        [user]="user"
+        (select)="onSelectUser($event)"
+      >
+      </app-user>
+    </li>
+    }
+    <!-- <li>
+      <app-user [user]="users[4]" (select)="onSelectUser($event)"> </app-user>
+    </li>
+    <li>
+      <app-user [user]="users[1]" (select)="onSelectUser($event)"></app-user>
+    </li>
+    <li>
+      <app-user [user]="users[2]" (select)="onSelectUser($event)"></app-user>
+    </li>
+    <li>
+      <app-user [user]="users[3]" (select)="onSelectUser($event)" />
+    </li>
+    <li>
+      <app-user [user]="users[0]" (select)="onSelectUser($event)"></app-user>
+    </li>
+    <li>
+      <app-user [user]="users[5]" (select)="onSelectUser($event)"></app-user>
+    </li> --listing is done manually here, for dynamic changes in data, use for-->
+  </ul>
+
+  @if (selectedUser){
+  <app-tasks [userId]="selectedUser.id" [name]="selectedUser.name" />
+  }@else {
+  <p id="fallback">Select a user first, silly!</p>
+  }
+
+  <!-- <app-tasks *ngIf="selectedUser; else fallback" [name]="selectedUser!.name" />
+  <ng-template #fallback>
+    <p id="fallback">Select a user first, silly!</p>
+  </ng-template> --Using ngIf  and ng-template for conditional rendering -->
+
+  <!-- <app-tasks [name]="selectedUser ? selectedUser.name : ' '" /> -->
+</main>
